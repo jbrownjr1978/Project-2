@@ -2,21 +2,21 @@ package org.example.Model;
 import java.util.Objects;
 
 public class Manufacturer {
-    public String name;
+    public String manufacturerName;
     public Manufacturer(){
 
         }
 
         public Manufacturer(String name) {
-            this.name = name;
+            this.manufacturerName = manufacturerName;
         }
 
         public String getName() {
-            return name;
+            return manufacturerName;
         }
 
         public void setName(String name) {
-            this.name = name;
+            this.manufacturerName = manufacturerName;
         }
 
         @Override
@@ -24,18 +24,18 @@ public class Manufacturer {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Manufacturer manufacturer = (Manufacturer) o;
-            return Objects.equals(name, manufacturer.name);
+            return Objects.equals(manufacturerName, manufacturer.manufacturerName);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(name);
+            return Objects.hash(manufacturerName);
         }
 
         @Override
         public String toString() {
             return "Manufacturer{" +
-                    "name='" + name + '\'' +
+                    "name='" + manufacturerName + '\'' +
                     '}';
         }
     }

@@ -54,9 +54,9 @@ public class Television {
     @Override
     public String toString() {
         return "Television{" +
-                "title='" + price + '\'' +
+                "price='" + price + '\'' +
                 ", manufacturerName='" + manufacturerName + '\'' +
                 '}';
     }
 }
-}
+
