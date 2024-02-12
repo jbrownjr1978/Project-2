@@ -5,6 +5,7 @@ public class Television {
     public long id;
     public double price;
     public String manufacturerName;
+    public String productName;
 
     public long getId() {
         return id;
