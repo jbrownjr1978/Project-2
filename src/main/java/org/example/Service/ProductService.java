@@ -1,53 +1,52 @@
 package org.example.Service;
 
-import org.example.Exception.TelevisionException;
-import org.example.Model.Television;
+import org.example.Exception.ProductException;
+import org.example.Model.Product;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class TelevisionService {
+public class ProductService {
     ManufacturerService manufacturerService;
-    List<Television> televisionList;
+    List<Product>productList;
 
-    public TelevisionService(ManufacturerService manufacturerService) {
+    public ProductService(ManufacturerService manufacturerService) {
         this.manufacturerService = manufacturerService;
-        televisionList = new ArrayList<>();
+        productList = new ArrayList<>();
     }
 
-    public List<Television> getTelevisionList() {
-        return televisionList;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public Television addTelevision(Television t) throws TelevisionException {
-        if (t.getPrice() <= 0 || t.getManufacturerName() == null) {
-            throw new TelevisionException("price and manufacturer fields must not be empty");
+    public Product addProduct(Product p) throws ProductException {
+        if (p.getPrice() <= 0 || p.getProductName() == null || p.getManufacturerName() == null){
+            throw new ProductException("price, manufacturerName, and productName fields must not be empty");
 
         }
 
         long id = (long) (Math.random() * Long.MAX_VALUE);
-        t.setId(id);
-        televisionList.add(t);
-        return t;
+        p.setId(id);
+        productList.add(p);
+        return p;
 
     }
 
-        public Television getTelevisionById (long id){
-                for (int i = 0; i < televisionList.size(); i++) {
-                Television currentTelevision = televisionList.get(i);
-                if (currentTelevision.getId() == id) {
-                    return currentTelevision;
+        public Product getProductById (long id){
+                for (int i = 0; i < productList.size(); i++) {
+                Product currentProduct = productList.get(i);
+                if (currentProduct.getId() == id) {
+                    return currentProduct;
                 }
             }
             return null;
         }
 
-        public Television removeTelevisionById (Long id){
-            for (int i = 0; i < televisionList.size(); i++) {
-                Television currentTelevision = televisionList.get(i);
-                if (currentTelevision == televisionList.get(i)) {
-                    televisionList.remove(i);
-                    System.out.println("Television has been removed");
+        public Product removeProductById (Long id){
+            for (int i = 0; i < productList.size(); i++) {
+                Product currentProduct = productList.get(i);
+                if (currentProduct == productList.get(i)) {
+                    productList.remove(i);
+                    System.out.println("Product has been removed");
                     ;
                 }
 

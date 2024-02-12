@@ -1,11 +1,15 @@
 package org.example.Model;
 import java.util.Objects;
 
-public class Television {
+public class Product {
     public long id;
     public double price;
     public String manufacturerName;
     public String productName;
+
+    public String getProductName() {
+        return productName;
+    }
 
     public long getId() {
         return id;
@@ -15,10 +19,11 @@ public class Television {
         this.id = id;
     }
 
-    public Television(){
+    public Product(){
 
     }
-    public Television(Double price, String manufacturerName) {
+    public Product(String productName, Double price, String manufacturerName) {
+        this.productName = productName;
         this.price = price;
         this.manufacturerName = manufacturerName;
     }
@@ -43,20 +48,22 @@ public class Television {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Television television = (Television) o;
-        return Objects.equals(price, television.price) && Objects.equals(manufacturerName, television.manufacturerName);
+        Product product = (Product) o;
+        return id == product.id && Double.compare(product.price, price) == 0 && Objects.equals(manufacturerName, product.manufacturerName) && Objects.equals(productName, product.productName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, manufacturerName);
+        return Objects.hash(id, price, manufacturerName, productName);
     }
 
     @Override
     public String toString() {
-        return "Television{" +
-                "price='" + price + '\'' +
+        return "Product{" +
+                "id=" + id +
+                ", price=" + price +
                 ", manufacturerName='" + manufacturerName + '\'' +
+                ", productName='" + productName + '\'' +
                 '}';
     }
 }

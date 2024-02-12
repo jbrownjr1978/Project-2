@@ -11,11 +11,11 @@ public class Manufacturer {
             this.manufacturerName = manufacturerName;
         }
 
-        public String getName() {
+        public String getManufacturerName() {
             return manufacturerName;
         }
 
-        public void setName(String name) {
+        public void setName(String manufacturerName) {
             this.manufacturerName = manufacturerName;
         }
 

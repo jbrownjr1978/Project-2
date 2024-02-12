@@ -3,20 +3,20 @@ package org.example.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
-import org.example.Exception.TelevisionException;
+import org.example.Exception.ProductException;
 import org.example.Model.Manufacturer;
-import org.example.Model.Television;
+import org.example.Model.Product;
 import org.example.Service.ManufacturerService;
-import org.example.Service.TelevisionService;
+import org.example.Service.ProductService;
 
 import java.util.List;
 public class TvController {
     ManufacturerService manufacturerService;
-    TelevisionService televisionService;
+    ProductService productService;
 
-    public TvController(ManufacturerService manufacturerService, TelevisionService televisionService){
+    public TvController(ManufacturerService manufacturerService, ProductService productService){
         this.manufacturerService = manufacturerService;
-        this.televisionService = televisionService;
+        this.productService = productService;
     }
 /*using method to create and configure Javalin api.
 Define endpoints to a specific HTTp verb
@@ -35,9 +35,9 @@ Every endpoint will contain a URI (Uniform Resource Identifier)
             List<Manufacturer> manufacturerList = manufacturerService.getManufacturerList();
             context.json(manufacturerList);
         });
-        api.get("television", context -> {
-            List<Television> televisionList = televisionService.getTelevisionList();
-            context.json(televisionList);
+        api.get("product", context -> {
+            List<Product> productList = productService.getProductList();
+            context.json(productList);
         });
         api.post("manufacturer", context -> {
             try{
@@ -49,41 +49,41 @@ Every endpoint will contain a URI (Uniform Resource Identifier)
                 context.status(400);
             }
         });
-        api.post("television", context -> {
+        api.post("product", context -> {
             try{
                 ObjectMapper om = new ObjectMapper();
-                Television t = om.readValue(context.body(), Television.class);
-                Television newTelevision = televisionService.addTelevision(t);
+                Product p = om.readValue(context.body(), Product.class);
+                Product newProduct = productService.addProduct(p);
                 context.status(201);
-                context.json(newTelevision);
+                context.json(newProduct);
             }catch(JsonProcessingException e){
                 context.status(400);
-            }catch(TelevisionException e){
+            }catch(ProductException e){
                 context.result(e.getMessage());
                 context.status(400);
             }
         });
         /**
-         * case 1: the television id is found
-         *  - respond with the television JSON status 200
-         *  case 2: the television is not found
+         * case 1: the product id is found
+         *  - respond with the product JSON status 200
+         *  case 2: the product is not found
          *  - respond with no body status 404
          */
-        api.get("television/{id}", context -> {
+        api.get("product/{id}", context -> {
             long id = Long.parseLong(context.pathParam("id"));
-            Television t = televisionService.getTelevisionById(id);
-            if(t == null){
+            Product p = productService.getProductById(id);
+            if(p == null){
                 context.status(404);
             }else{
-                context.json(t);
+                context.json(p);
                 context.status(200);
             }
         });
 
-        api.delete("deletetelevision/{id}", context ->{
+        api.delete("deleteproduct/{id}", context ->{
             long id = Long.parseLong(context.pathParam("id"));
-            Television t = televisionService.getTelevisionById(id);
-            televisionService.removeTelevisionById(id);
+            Product p = productService.getProductById(id);
+            productService.removeProductById(id);
                 context.status(200);
 
 
