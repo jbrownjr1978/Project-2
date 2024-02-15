@@ -14,8 +14,8 @@ public class Main {
         //        instantiate & inject all dependencies of our project
 
         SellerService sellerService = new SellerService();
-        ProductService televisionService = new ProductService(sellerService);
-        TvController tvController = new TvController(sellerService, televisionService);
+        ProductService productService = new ProductService(sellerService);
+        TvController tvController = new TvController(sellerService, productService);
 
         Javalin api = tvController.getAPI();
         api.start(9007);

@@ -4,6 +4,7 @@ import org.example.Exception.ProductException;
 import org.example.Model.Product;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductService {
     SellerService sellerService;
@@ -57,13 +58,16 @@ public class ProductService {
         public Product updateProductById(Product p,Long id){
         for (int i = 0; i < productList.size(); i++) {
             Product currentProduct = productList.get(i);
-            if (currentProduct == productList.get(i)) {
+            if (currentProduct.getId()== id && Objects.equals(currentProduct.getSellerName(), p.getSellerName()))  {
                 productList.remove(i);
                 p.setId(id);
                 productList.add(p);
             }
             }return null;
 
-        }    }
+        }
+
+
+}
 
 

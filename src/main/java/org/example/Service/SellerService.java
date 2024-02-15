@@ -27,12 +27,13 @@ public class SellerService {
         }
         for (int i = 0; i < sellerList.size(); i++) {
             Seller currentSeller = sellerList.get(i);
-            if (currentSeller == s) {
+            if (currentSeller.equals(s)) {
                 throw new SellerException("Seller already exists");
 
-            } else sellerList.add(s);
+            }
 
-        }return s;
+        }sellerList.add(s);
+        return s;
 
 
     }
