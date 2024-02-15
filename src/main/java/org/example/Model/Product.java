@@ -4,7 +4,7 @@ import java.util.Objects;
 public class Product {
     public long id;
     public double price;
-    public String manufacturerName;
+    public String sellerName;
     public String productName;
 
     public String getProductName() {
@@ -22,10 +22,10 @@ public class Product {
     public Product(){
 
     }
-    public Product(String productName, Double price, String manufacturerName) {
+    public Product(String productName, Double price, String sellerName) {
         this.productName = productName;
         this.price = price;
-        this.manufacturerName = manufacturerName;
+        this.sellerName = sellerName;
     }
 
     public double getPrice() {
@@ -36,12 +36,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getManufacturerName() {
-        return manufacturerName;
+    public String getSellerName() {
+        return sellerName;
     }
 
-    public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
     @Override
@@ -49,12 +49,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && Double.compare(product.price, price) == 0 && Objects.equals(manufacturerName, product.manufacturerName) && Objects.equals(productName, product.productName);
+        return id == product.id && Double.compare(product.price, price) == 0 && Objects.equals(sellerName, product.sellerName) && Objects.equals(productName, product.productName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, price, manufacturerName, productName);
+        return Objects.hash(id, price, sellerName, productName);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", price=" + price +
-                ", manufacturerName='" + manufacturerName + '\'' +
+                ", sellerName='" + sellerName + '\'' +
                 ", productName='" + productName + '\'' +
                 '}';
     }

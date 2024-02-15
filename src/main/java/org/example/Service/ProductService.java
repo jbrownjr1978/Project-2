@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
-    ManufacturerService manufacturerService;
+    SellerService sellerService;
     List<Product>productList;
 
-    public ProductService(ManufacturerService manufacturerService) {
-        this.manufacturerService = manufacturerService;
+    public ProductService(SellerService sellerService) {
+        this.sellerService = sellerService;
         productList = new ArrayList<>();
-    }
+           }
 
     public List<Product> getProductList() {
         return productList;
     }
 
     public Product addProduct(Product p) throws ProductException {
-        if (p.getPrice() <= 0 || p.getProductName() == null || p.getManufacturerName() == null){
-            throw new ProductException("price, manufacturerName, and productName fields must not be empty");
+        if (p.getPrice() <= 0 || p.getProductName() == null || p.getSellerName() == null){
+            throw new ProductException("price, sellerName, and productName fields must not be empty");
 
         }
 
@@ -46,14 +46,24 @@ public class ProductService {
                 Product currentProduct = productList.get(i);
                 if (currentProduct == productList.get(i)) {
                     productList.remove(i);
-                    System.out.println("Product has been removed");
-                    ;
+
+
                 }
 
             }
             return null;
 
         }
-    }
+        public Product updateProductById(Product p,Long id){
+        for (int i = 0; i < productList.size(); i++) {
+            Product currentProduct = productList.get(i);
+            if (currentProduct == productList.get(i)) {
+                productList.remove(i);
+                p.setId(id);
+                productList.add(p);
+            }
+            }return null;
+
+        }    }
 
 

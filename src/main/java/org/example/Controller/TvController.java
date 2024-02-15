@@ -4,18 +4,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 import org.example.Exception.ProductException;
-import org.example.Model.Manufacturer;
+import org.example.Model.Seller;
 import org.example.Model.Product;
-import org.example.Service.ManufacturerService;
+import org.example.Service.SellerService;
 import org.example.Service.ProductService;
+
 
 import java.util.List;
 public class TvController {
-    ManufacturerService manufacturerService;
+    SellerService sellerService;
     ProductService productService;
 
-    public TvController(ManufacturerService manufacturerService, ProductService productService){
-        this.manufacturerService = manufacturerService;
+    public TvController(SellerService sellerService, ProductService productService){
+        this.sellerService = sellerService;
         this.productService = productService;
     }
 /*using method to create and configure Javalin api.
@@ -31,20 +32,21 @@ Every endpoint will contain a URI (Uniform Resource Identifier)
 //        I'll showcase an endpoint that requires usage of both the manufacturer and television service
 //        I'll showcase exception handling within the controller
 //        Test case/logging
-        api.get("manufacturer", context -> {
-            List<Manufacturer> manufacturerList = manufacturerService.getManufacturerList();
-            context.json(manufacturerList);
+        api.get("seller", context -> {
+            List<Seller> sellerList = sellerService.getSellerList();
+            context.json(sellerList);
         });
         api.get("product", context -> {
             List<Product> productList = productService.getProductList();
             context.json(productList);
         });
-        api.post("manufacturer", context -> {
+        api.post("seller", context -> {
             try{
                 ObjectMapper om = new ObjectMapper();
-                Manufacturer m = om.readValue(context.body(), Manufacturer.class);
-                manufacturerService.addManufacturer(m);
+                Seller s = om.readValue(context.body(), Seller.class);
+                Seller newSeller= sellerService.addSeller(s);;
                 context.status(201);
+                context.json(newSeller);
             }catch(JsonProcessingException e){
                 context.status(400);
             }
@@ -88,6 +90,16 @@ Every endpoint will contain a URI (Uniform Resource Identifier)
 
 
     });
+        api.put("updateproduct/{id}" , context ->{
+            long id = Long.parseLong(context.pathParam("id"));
+            Product p = productService.getProductById(id);
+            productService.removeProductById(id);
+            ObjectMapper om = new ObjectMapper();
+            Product p2 = om.readValue(context.body(), Product.class);
+            Product newProduct = productService.addProduct(p2);
+            productService.updateProductById(p2,id);
+
+        });
         return api;
     }
 
